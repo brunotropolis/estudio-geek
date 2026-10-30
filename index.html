@@ -89,6 +89,26 @@ textarea.in.big{min-height:180px}
 .toast.on{opacity:1}
 .load{color:var(--mut);padding:40px 0;text-align:center}
 .small{font-size:12px;color:var(--mut)}
+/* prévia do post: lâminas com swipe, vídeo em loop */
+.tw{position:relative;display:block;width:100%;padding:0;border-radius:10px;overflow:hidden}
+.tw .thumb{display:block}
+.tw .bd{position:absolute;right:8px;top:8px;background:rgba(0,0,0,.72);color:#fff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:999px;letter-spacing:.02em}
+.vw{position:fixed;inset:0;z-index:25;background:rgba(0,0,0,.94);display:none;flex-direction:column;align-items:center;justify-content:center;padding:calc(12px + env(safe-area-inset-top)) 0 calc(16px + env(safe-area-inset-bottom))}
+.vw.on{display:flex}
+.vw .hd{width:min(100%,480px);display:flex;align-items:center;gap:10px;padding:0 16px 10px}
+.vw .hd .t{flex:1;font-weight:600;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vw .hd button{color:var(--tx);font-size:26px;line-height:1;padding:4px 8px}
+.vw .tr{width:min(100%,480px);display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.vw .tr::-webkit-scrollbar{display:none}
+.vw .sl{flex:none;width:100%;scroll-snap-align:center;aspect-ratio:4/5;background:#000}
+.vw .sl img,.vw .sl video{width:100%;height:100%;object-fit:cover;display:block}
+.vw .dots{display:flex;gap:6px;padding-top:12px}
+.vw .dots i{width:6px;height:6px;border-radius:50%;background:#555;transition:background .15s}
+.vw .dots i.on{background:var(--am)}
+.vw .ar{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:22px;display:none}
+@media(hover:hover){.vw .ar{display:block}}
+.vw .ar.l{left:calc(50% - 300px)}.vw .ar.r{right:calc(50% - 300px)}
+.tag.app{color:var(--warn);background:rgba(255,159,67,.12)}
 </style>
 </head>
 <body>
@@ -162,6 +182,13 @@ textarea.in.big{min-height:180px}
   </div>
 </div>
 
+<div class="vw" id="vw">
+  <div class="hd"><div class="t" id="vwT"></div><span class="small" id="vwN"></span><button type="button" data-vwx aria-label="Fechar">×</button></div>
+  <div class="tr" id="vwTr"></div>
+  <div class="dots" id="vwDots"></div>
+  <button class="ar l" type="button" data-vwp="-1" aria-label="Anterior">‹</button><button class="ar r" type="button" data-vwp="1" aria-label="Próxima">›</button>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -196,6 +223,14 @@ function render(){
   const pl=PS.filter(p=>filtroPost==='todos'||p.status===filtroPost||(filtroPost==='publicado'&&p.status==='parcial'));
   $('#posts').innerHTML=pl.length?pl.map(post).join(''):'<div class="empty" style="grid-column:1/-1">Ainda não tem post do @brunotropolis aqui. Quando eu produzir uma pauta, ela aparece pra você aprovar.</div>';
 }
+// carrossel com vídeo: o Motor ainda não posta, então não oferece "Aprovar" (sairia só a 1ª lâmina como Reels)
+const midiaDe=id=>((DB.posts.find(x=>x.id===id)||{}).midia)||[];
+const soApp=id=>{const m=midiaDe(id);return m.length>1&&m.some(x=>/video/i.test(x.tipo||''))};
+function thumbVer(id,capa){
+  const m=midiaDe(id); const vid=m.some(x=>/video/i.test(x.tipo||''));
+  const bd=m.length>1?`${vid?'▶ ':''}${m.length} lâminas`:(vid?'▶ vídeo':'');
+  return `<button class="tw" type="button" data-ver="${id}">${capa?`<img class="thumb" src="${h(capa)}" alt="" loading="lazy">`:'<div class="thumb"></div>'}${bd?`<span class="bd">${bd}</span>`:''}</button>`;
+}
 function card(p){
   const po=p.post; const redes=(p.plataformas||[]).map(r=>r.slice(0,2).toUpperCase()).join(' · ');
   const nref=(p.referencias||[]).length;
@@ -203,21 +238,42 @@ function card(p){
     <div class="meta"><span class="st ${p.status}">● ${SL[p.status]||p.status}</span><span class="tag f">${FL[p.formato]||p.formato}</span>${p.prioridade==1?'<span class="tag p1">Alta</span>':''}${p.data_desejada?`<span class="tag">${dataBR(p.data_desejada)}</span>`:''}</div>
     <div class="t">${h(p.titulo||'(sem título)')}</div>
     ${p.ideia?`<div class="i">${h(p.ideia)}</div>`:''}
-    ${po&&po.capa?`<img class="thumb" src="${h(po.capa)}" alt="" loading="lazy">`:''}
+    ${po&&(po.capa||midiaDe(po.id).length)?thumbVer(po.id,po.capa):''}
     <div class="small">${redes}${nref?' · '+nref+' ref.':''}${po&&po.agendado_para?' · post '+dataBR(po.agendado_para,1):''}</div>
     <div class="acts">
       <button class="btn ghost" data-ed="${p.id}">Editar</button>
       ${p.status==='ideia'?`<button class="btn am" data-mv="${p.id}" data-to="a_produzir">Mandar produzir</button>`:''}
-      ${po&&['rascunho','pausado'].includes(po.status)?`<button class="btn am" data-ap="${po.id}">Aprovar e agendar</button>`:''}
+      ${po&&['rascunho','pausado'].includes(po.status)?(soApp(po.id)?'<span class="tag app">Postar pelo app (carrossel de vídeo)</span>':`<button class="btn am" data-ap="${po.id}">Aprovar e agendar</button>`):''}
     </div></div>`;
 }
 function post(p){
   const st={rascunho:'Pra aprovar',agendado:'Agendado',publicado:'Publicado',parcial:'Parcial',erro:'Erro',publicando:'Publicando',pausado:'Pausado'}[p.status]||p.status;
   const cor={rascunho:'produzido',agendado:'agendado',publicado:'postado',parcial:'a_produzir',erro:'descartado'}[p.status]||'ideia';
-  return `<div class="post">${p.capa?`<img class="thumb" src="${h(p.capa)}" alt="" loading="lazy">`:'<div class="thumb"></div>'}
+  return `<div class="post">${thumbVer(p.id,p.capa)}
     <div class="t">${h(p.titulo||'Post')}</div><div class="d"><span class="st ${cor}">● ${st}</span> ${dataBR(p.publicado_em||p.agendado_para,1)}</div>
-    ${p.status==='rascunho'?`<button class="btn am" data-ap="${p.id}" style="justify-content:center">Aprovar</button>`:''}</div>`;
+    ${p.status==='rascunho'?(soApp(p.id)?'<span class="tag app">Postar pelo app</span>':`<button class="btn am" data-ap="${p.id}" style="justify-content:center">Aprovar</button>`):''}</div>`;
 }
+// visualizador
+function ver(id){
+  const p=DB.posts.find(x=>x.id===id)||{}; const m=[...(p.midia||[])].sort((a,b)=>(a.ordem||0)-(b.ordem||0));
+  const itens=m.length?m:(p.capa?[{url:p.capa,tipo:'foto'}]:[]); if(!itens.length) return;
+  $('#vwT').textContent=p.titulo||'Post';
+  $('#vwTr').innerHTML=itens.map((x,i)=>`<div class="sl" data-i="${i}">${/video/i.test(x.tipo||'')||/\.mp4($|\?)/i.test(x.url)?`<video src="${h(x.url)}" muted loop playsinline preload="metadata"></video>`:`<img src="${h(x.url)}" alt="">`}</div>`).join('');
+  $('#vwDots').innerHTML=itens.length>1?itens.map((_,i)=>`<i class="${i?'':'on'}"></i>`).join(''):'';
+  $('#vwN').textContent=itens.length>1?`1/${itens.length}`:'';
+  $('#vw').classList.add('on'); $('#vwTr').scrollLeft=0; document.body.style.overflow='hidden';
+  vwAtual=-1; vwFoco(0);
+}
+// toca só a lâmina visível (a posição do arraste define qual)
+let vwAtual=-1;
+function vwFoco(i){
+  if(i===vwAtual) return; vwAtual=i;
+  const sl=[...$('#vwTr').querySelectorAll('.sl')];
+  sl.forEach((s,k)=>{ const v=s.querySelector('video'); if(!v) return; if(k===i){ v.currentTime=0; v.play().catch(()=>{}); } else v.pause(); });
+  $('#vwDots').querySelectorAll('i').forEach((d,k)=>d.classList.toggle('on',k===i)); if(sl.length>1) $('#vwN').textContent=`${i+1}/${sl.length}`;
+}
+$('#vwTr').addEventListener('scroll',()=>{ const tr=$('#vwTr'); vwFoco(Math.round(tr.scrollLeft/Math.max(1,tr.clientWidth))); },{passive:true});
+function fecharVer(){ $('#vw').classList.remove('on'); $('#vwTr').querySelectorAll('video').forEach(v=>v.pause()); $('#vwTr').innerHTML=''; document.body.style.overflow=''; vwAtual=-1; }
 // editor
 function pick(el,opts,sel,multi){ el.innerHTML=opts.map(([k,l])=>`<button type="button" class="chip ${(multi?sel.includes(k):sel===k)?'on':''}" data-k="${k}">${l}</button>`).join(''); el.onclick=e=>{const b=e.target.closest('[data-k]');if(!b)return; if(multi){b.classList.toggle('on')}else{el.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c===b))}}; }
 const lido=el=>[...el.querySelectorAll('.chip.on')].map(c=>c.dataset.k);
@@ -252,6 +308,9 @@ $('#fRefImg').onchange=async e=>{ for(const f of [...e.target.files]){ try{ toas
 document.addEventListener('click',async e=>{
   const t=e.target;
   if(t.closest('[data-close]')) return fechar();
+  const vr=t.closest('[data-ver]'); if(vr) return ver(vr.dataset.ver);
+  if(t.closest('[data-vwx]')) return fecharVer();
+  const vp=t.closest('[data-vwp]'); if(vp){ const tr=$('#vwTr'); tr.scrollBy({left:tr.clientWidth*(+vp.dataset.vwp),behavior:'smooth'}); return }
   const f=t.closest('[data-f]'); if(f){filtro=f.dataset.f;render();return}
   const fp=t.closest('[data-fp]'); if(fp){filtroPost=fp.dataset.fp;render();return}
   const ed=t.closest('[data-ed]'); if(ed) return abrir(DB.pautas.find(p=>p.id===ed.dataset.ed));
@@ -267,7 +326,8 @@ $('#novaBtn').onclick=()=>abrir(null);
 $('#fSalvar').onclick=()=>salvar();
 $('#fDescartar').onclick=()=>{ if(confirm('Descartar esta pauta?')) salvar('descartado'); };
 $('#fRefAdd').onclick=addLink; $('#fRefUrl').onkeydown=e=>{ if(e.key==='Enter'){e.preventDefault();addLink()} };
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') fechar(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ fechar(); fecharVer(); }
+  if($('#vw').classList.contains('on')&&(e.key==='ArrowRight'||e.key==='ArrowLeft')){ const tr=$('#vwTr'); tr.scrollBy({left:tr.clientWidth*(e.key==='ArrowRight'?1:-1),behavior:'smooth'}); } });
 carregar();
 </script>
 </body>
