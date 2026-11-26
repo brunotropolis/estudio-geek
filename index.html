@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-marca="todas">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -27,19 +27,19 @@
   --tr:background-color .45s ease, color .45s ease, border-color .45s ease, box-shadow .45s ease;
   color-scheme:light;
 }
-body[data-marca="brunotropolis"]{ --bg:#DCE8FA; --card:#F7FAFF; --card2:#E8F0FC; --line2:#BFD2EE; --acc:#2F7DF6; --acc-esc:#1650B8; --acc-tx:#011E3B; --acc2:#F95509; --acc-suave:#D3E3FD; }
-body[data-marca="todas"]{ --bg:#F3EADC; --card:#FFFCF6; --card2:#F1E7D7; --line2:#DCCDB5; --acc:#F95509; --acc-esc:#B83C00; --acc2:#2F7DF6; --acc-suave:#FFE2CC; }
+html[data-marca="brunotropolis"]{ --bg:#DCE8FA; --card:#F7FAFF; --card2:#E8F0FC; --line2:#BFD2EE; --acc:#2F7DF6; --acc-esc:#1650B8; --acc-tx:#011E3B; --acc2:#F95509; --acc-suave:#D3E3FD; }
+html[data-marca="todas"]{ --bg:#ECE8E2; --card:#FFFFFF; --card2:#F2EFEA; --line2:#D6D0C6; --acc:#F95509; --acc-esc:#B83C00; --acc2:#2F7DF6; --acc-suave:#FFE2CC; }
 @media (prefers-color-scheme:dark){
   :root{ --bg:#011E3B; --card:#0F3762; --card2:#16426F; --ink:#000D1B; --line:#4A78A8; --line2:#2A5584;
     --tx:#FBE4BE; --mut:#D6C7AE; --sombra:0 4px 0 #000D1B; --acc-suave:#3A1E0E;
     --ok:#4CD98A; --warn:#FFB45C; --bad:#FF7A6E; --roxo:#B99BFF; --azul:#7CB3FF; color-scheme:dark; }
-  body[data-marca="buscadorgeek"]{ --bg:#1C120B; --card:#3A2514; --card2:#48301B; --line:#8A5D36; --line2:#5E3F24; --ink:#0D0704; --acc-suave:#4A2412; }
-  body[data-marca="brunotropolis"]{ --bg:#06182F; --card:#133260; --card2:#1A3E72; --line:#4D7DBE; --line2:#2C5590; --ink:#020B17; --acc:#4C90FF; --acc-suave:#16345E; }
-  body[data-marca="todas"]{ --bg:#101722; --card:#243147; --card2:#2C3B55; --line:#566A8C; --line2:#3A4B68; --ink:#05080D; --acc-suave:#3A2114; }
+  html[data-marca="buscadorgeek"]{ --bg:#1C120B; --card:#3A2514; --card2:#48301B; --line:#8A5D36; --line2:#5E3F24; --ink:#0D0704; --acc-suave:#4A2412; }
+  html[data-marca="brunotropolis"]{ --bg:#06182F; --card:#133260; --card2:#1A3E72; --line:#4D7DBE; --line2:#2C5590; --ink:#020B17; --acc:#4C90FF; --acc-suave:#16345E; }
+  html[data-marca="todas"]{ --bg:#101722; --card:#243147; --card2:#2C3B55; --line:#566A8C; --line2:#3A4B68; --ink:#05080D; --acc-suave:#3A2114; }
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%}
-html,body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 var(--f)}
+html,body{margin:0;background:var(--bg);transition:background-color .45s ease;color:var(--tx);font:16px/1.45 var(--f)}
 body{padding:0 0 calc(88px + env(safe-area-inset-bottom));transition:var(--tr)}
 button,input,textarea,select{font:inherit;color:inherit}
 button{cursor:pointer;border:0;background:none;user-select:none;touch-action:manipulation}
@@ -76,6 +76,8 @@ header{position:sticky;top:0;z-index:5;background:var(--noite);color:var(--creme
   .peca .capa{border-bottom-color:var(--line)}
   .colar input,input.in,textarea.in,select.in,.lado textarea,.lado input{border-color:var(--line)}
   h2.sec,.marca-bloco > .mkh b{color:var(--creme)}
+  .par .antes{border-color:var(--line);color:#E2D5BF}
+  .par .lb,.modelo .small{color:#E2D5BF}
 }
 ::placeholder{color:var(--mut);opacity:.85}
 /* títulos e textos */
@@ -244,6 +246,70 @@ textarea.in.big{min-height:160px}
 .redes{display:flex;gap:14px;flex-wrap:wrap;font-weight:900;font-size:14.5px}
 .redes label{display:flex;gap:6px;align-items:center;color:var(--tx)}
 .linha{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+/* menu lateral (computador) e "Mais" (celular) */
+.so-cel{display:none!important}
+@media(max-width:899px){nav.tab .so-desk{display:none}nav.tab .so-cel{display:grid!important}}
+@media(min-width:900px){
+  body{padding:0 0 24px 212px}
+  header{z-index:7}
+  nav.tab{top:0;bottom:0;left:0;right:auto;width:212px;flex-direction:column;justify-content:flex-start;gap:4px;padding:92px 12px 16px;border-top:0;border-right:4px solid var(--acc)}
+  nav.tab button{flex:none;max-width:none;min-height:46px;grid-template-columns:30px 1fr;justify-items:start;align-items:center;gap:8px;text-align:left;font-size:15px;padding:10px 12px}
+  nav.tab button b{font-size:18px;justify-self:center}
+  nav.tab .n{position:static;justify-self:end;grid-column:3}
+  nav.tab button{grid-template-columns:30px 1fr auto}
+  .toast{bottom:24px}
+}
+.mais{display:grid;gap:10px}
+.mais button{display:flex;align-items:center;gap:12px;padding:14px;border-radius:16px;background:var(--card);border:2.5px solid var(--ink);box-shadow:0 3px 0 var(--ink);font-weight:900;font-size:16px;text-align:left}
+.mais button b{font-size:20px;width:28px;text-align:center}
+/* automações */
+.modelo{background:var(--card);border:2.5px solid var(--ink);border-radius:var(--r);box-shadow:var(--sombra);padding:14px;display:grid;gap:12px;margin:8px 0 18px}
+.modelo h3{margin:0;font:400 19px/1.2 var(--t)}
+.modelo summary::-webkit-details-marker{display:none}
+.par{display:grid;gap:8px;grid-template-columns:1fr}
+@media(min-width:760px){.par{grid-template-columns:1fr 1fr}}
+.par .lb{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+.par .antes{background:var(--card2);border:2px dashed var(--line2);border-radius:14px;padding:10px 12px;white-space:pre-wrap;font-size:14px;color:var(--mut);text-decoration:line-through;text-decoration-color:#C0291B66}
+.par textarea{width:100%;min-height:92px;resize:vertical;background:var(--bg);border:2px solid var(--acc);border-radius:14px;padding:10px 12px;font-size:15px;color:var(--tx)}
+.bloco-t{border-top:2px solid var(--line2);padding-top:10px;display:grid;gap:8px}
+.bloco-t > b{font-size:14px}
+.auto{background:var(--card);border:2.5px solid var(--ink);border-radius:var(--r);box-shadow:var(--sombra);padding:12px;display:grid;gap:10px;transition:var(--tr)}
+.auto .topo{display:grid;grid-template-columns:56px 1fr auto;gap:10px;align-items:center}
+.auto .topo img,.auto .topo .ph{width:56px;height:70px;border-radius:10px;object-fit:cover;background:var(--card2);border:2px solid var(--line2)}
+.auto .pal{font:400 18px/1.1 var(--t)}
+.nums{display:flex;gap:6px;flex-wrap:wrap}
+.nums span{font-size:12px;font-weight:900;background:var(--card2);border-radius:99px;padding:3px 10px}
+.fluxo{display:grid;gap:0;margin-top:2px}
+.passo{display:grid;grid-template-columns:30px 1fr;gap:10px;position:relative;padding-bottom:12px}
+.passo::before{content:"";position:absolute;left:14px;top:30px;bottom:0;width:2px;background:var(--line2)}
+.passo:last-child::before{display:none}
+.passo .ic{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:14px;background:var(--acc);color:var(--acc-tx);font-weight:900;border:2px solid var(--ink)}
+.passo .cx{min-width:0;display:grid;gap:6px}
+.passo .tt2{font-weight:900;font-size:14px}
+.bolha{background:var(--card2);border-radius:16px 16px 16px 4px;padding:9px 12px;white-space:pre-wrap;font-size:14px;line-height:1.4;overflow-wrap:anywhere;border:1.5px solid var(--line2)}
+.bolha a{word-break:break-all}
+.botao-dm{display:inline-block;margin-top:6px;background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:6px 12px;font-weight:900;font-size:13px}
+.lista-auto{display:grid;gap:14px;align-items:start;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr))}
+/* caixa de entrada */
+.inbox{display:grid;gap:14px}
+@media(min-width:900px){.inbox{grid-template-columns:minmax(280px,360px) 1fr;align-items:start}}
+.contatos{display:grid;gap:8px}
+.contato{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;background:var(--card);border:2px solid var(--line2);border-radius:16px;padding:9px 10px;text-align:left;width:100%;transition:var(--tr)}
+.contato.on{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc)}
+.contato .av{width:44px;height:44px;border-radius:50%;background:var(--card2) center/cover;display:grid;place-items:center;font-weight:900;border:2px solid var(--line2)}
+.contato .nm{font-weight:900;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.contato .pv{font-size:13px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.contato .qd{font-size:11px;color:var(--mut);font-weight:800;text-align:right;display:grid;gap:4px;justify-items:end}
+.conversa{background:var(--card);border:2.5px solid var(--ink);border-radius:var(--r);box-shadow:var(--sombra);display:flex;flex-direction:column;min-height:420px;max-height:calc(100dvh - 200px);overflow:hidden}
+.conversa .cab{padding:12px 14px;border-bottom:2px solid var(--line2);display:flex;align-items:center;gap:10px}
+.conversa .msgs{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:8px;overscroll-behavior:contain}
+.msg{max-width:82%;padding:9px 12px;border-radius:16px;white-space:pre-wrap;font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+.msg.entrada{align-self:flex-start;background:var(--card2);border-bottom-left-radius:4px}
+.msg.saida{align-self:flex-end;background:var(--acc-suave);border-bottom-right-radius:4px}
+.msg .q{display:block;font-size:11px;color:var(--mut);font-weight:800;margin-top:4px}
+.msg.com{border:2px dashed var(--line2);background:transparent}
+.resp{border-top:2px solid var(--line2);padding:10px;display:grid;grid-template-columns:1fr auto;gap:8px}
+.resp textarea{min-height:46px;max-height:140px;resize:vertical;background:var(--bg);border:2px solid var(--line2);border-radius:14px;padding:10px 12px;font-size:16px;color:var(--tx)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -267,9 +333,12 @@ textarea.in.big{min-height:160px}
 <nav class="tab" id="tabs">
   <button data-v="aprovar"><b>✓</b>Aprovar<span class="n" id="nAprov" hidden></span></button>
   <button data-v="agenda"><b>▦</b>Agenda</button>
-  <button data-v="pautas"><b>✎</b>Pautas</button>
-  <button data-v="crescimento"><b>↗</b>Crescimento</button>
-  <button data-v="geek"><b>⌕</b>Produtos</button>
+  <button data-v="caixa"><b>✉</b>Caixa</button>
+  <button data-v="automacoes"><b>⚡</b>Automações</button>
+  <button data-v="pautas" class="so-desk"><b>✎</b>Pautas</button>
+  <button data-v="crescimento" class="so-desk"><b>↗</b>Crescimento</button>
+  <button data-v="geek" class="so-desk"><b>⌕</b>Produtos</button>
+  <button data-v="mais" class="so-cel" data-mais><b>☰</b>Mais</button>
 </nav>
 
 <div class="sheet" id="sheet">
@@ -305,6 +374,15 @@ textarea.in.big{min-height:160px}
   </div>
 </div>
 
+<div class="sheet" id="maisSheet">
+  <div class="bk" data-close></div>
+  <div class="pn"><h2>MAIS</h2><div class="mais">
+    <button data-ir-v="pautas"><b>✎</b>Pautas</button>
+    <button data-ir-v="crescimento"><b>↗</b>Crescimento</button>
+    <button data-ir-v="geek"><b>⌕</b>Produtos do Buscador Geek</button>
+  </div></div>
+</div>
+
 <div class="sheet" id="aprov">
   <div class="bk" data-close></div>
   <div class="pn">
@@ -320,6 +398,7 @@ textarea.in.big{min-height:160px}
 <div class="toast" id="toast"></div>
 
 <script>
+try{document.documentElement.dataset.marca=localStorage.getItem('est-marca')||'todas'}catch(e){}
 // ---------- base ----------
 const $=s=>document.querySelector(s);
 const h=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -358,11 +437,11 @@ async function carregar(){
   $('#app').style.opacity=1; render();
 }
 function render(){
-  document.body.dataset.marca=marca; document.querySelectorAll('#marcaSeg button').forEach(b=>b.classList.toggle('on',b.dataset.mk===marca));
-  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.v===vista));
+  document.documentElement.dataset.marca=marca; document.querySelectorAll('#marcaSeg button').forEach(b=>b.classList.toggle('on',b.dataset.mk===marca));
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.v===vista||(b.dataset.v==='mais'&&['pautas','crescimento','geek'].includes(vista))));
   const n=pendentes().length; const nb=$('#nAprov'); nb.hidden=!n; nb.textContent=n;
   if(!E.ok&&!G.ok){$('#app').innerHTML='<div class="load">Carregando…</div>';return}
-  ({aprovar:vAprovar,agenda:vAgenda,pautas:vPautas,crescimento:vCrescimento,geek:vGeek}[vista]||vAprovar)();
+  ({aprovar:vAprovar,agenda:vAgenda,pautas:vPautas,crescimento:vCrescimento,geek:vGeek,automacoes:vAutomacoes,caixa:vCaixa}[vista]||vAprovar)();
 }
 
 // ---------- APROVAR ----------
@@ -526,8 +605,8 @@ function cartaoProduto(p,tipo){
         :`<span class="st ${p.status==='escolhido'?'produzido':p.status==='usado'?'agendado':'ideia'}">● ${h({fila:'Na fila',escolhido:'Escolhido',usado:'Usado'}[p.status]||p.status)}</span>${p.status!=='usado'?`<button class="btn ghost s" data-st="${h(p.id)}" data-v="${p.status==='escolhido'?'fila':'escolhido'}">${p.status==='escolhido'?'Tirar':'Escolher'}</button><button class="btn ghost s" data-st="${h(p.id)}" data-v="descartado" aria-label="Descartar">✕</button>`:''}`}</div></div></div></article>`;
 }
 function vGeek(){
-  const abas=`<div class="chips"><button class="chip ${geekAba==='produtos'?'on':''}" data-ga="produtos">Produtos</button><button class="chip ${geekAba==='automacoes'?'on':''}" data-ga="automacoes">Automações "comenta"</button></div>`;
-  if(geekAba==='automacoes'){
+  const abas='';
+  if(false){
     $('#app').innerHTML=abas+`<p class="dica">Uma por carrossel ou Reels do Buscador Geek: quem comenta a palavra recebe o link no direct. Nasce desligada e liga sozinha quando você aprova.</p>
       ${G.automacoes.length?`<div class="tab-wrap"><table><thead><tr><th>Automação</th><th>Palavra</th><th>Redes</th><th></th></tr></thead><tbody>${G.automacoes.map(a=>`<tr><td>${h(a.nome)}</td><td>${h((a.gatilhos||[]).join(', '))}</td><td>${h((a.plataformas||[]).join(' + '))}</td><td><button class="btn s ${a.ativo?'am':'ghost'}" data-auto="${h(a.id)}" data-v="${a.ativo?0:1}">${a.ativo?'Ligada':'Desligada'}</button></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Nenhuma automação.</div>'}`;
     return;
@@ -544,6 +623,95 @@ function vGeek(){
     ${ofs.length?`<div class="grade">${ofs.map(o=>cartaoProduto(o,'oferta')).join('')}</div>`:'<div class="empty">Sem ofertas nesse filtro.</div>'}`;
   $('#formLink').onsubmit=async e=>{e.preventDefault();try{await geek('produto_add',{url:$('#link').value.trim()});toast('Link na fila');carregar()}catch(er){toast(er.message,true)}};
   const b=$('#busca'); b.oninput=()=>{busca=b.value.toLowerCase();const pos=b.selectionStart;vGeek();const nb=$('#busca');nb.focus();nb.setSelectionRange(pos,pos)};
+}
+
+
+// ---------- AUTOMAÇÕES ----------
+let A=null, abertos=new Set();
+const NOMEM={brunotropolis:'@brunotropolis',buscadorgeek:'Buscador Geek'};
+const ROT_MODELO=[['aberturas.0','1ª abertura do direct (sorteada)'],['aberturas.1','2ª abertura do direct (sorteada)'],['aberturas.2','3ª abertura do direct (sorteada)'],['links_1','Antes do link (1 produto)'],['links_n','Antes dos links (vários)'],['links_fim','Depois dos links'],['convite','Convite pro grupo (10 min depois)'],['final','Quando aceita o convite']];
+const pega=(o,k)=>k.split('.').reduce((a,x)=>a==null?a:a[x],o);
+const linkify=t=>h(t).replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');
+async function carregarAutomacoes(){try{A=await api({acao:'automacoes'})}catch(e){if(e.message!=='auth')toast('Automações não carregaram: '+e.message,true);A={automacoes:[],modelos:[]}}if(vista==='automacoes')vAutomacoes()}
+function blocoModelo(mo){
+  const ap=mo.status==='aprovado';
+  return `<details class="modelo" data-modelo="${mo.marca}" ${ap?'':'open'}><summary class="linha" style="justify-content:space-between;cursor:pointer;list-style:none"><h3>Textos das respostas · ${NOMEM[mo.marca]}</h3><span class="mk ${mo.marca}">${ap?'Em uso · ver':'Proposta nova'}</span></summary>
+    <p class="small" style="margin:0">${ap?'Esses são os textos que as automações usam agora'+(mo.aprovado_em?' (desde '+dataBR(mo.aprovado_em,1)+')':'')+'. Pode ajustar e aprovar de novo.':'Reescrevi as respostas no seu jeito de falar. À esquerda o que está no ar hoje, à direita a proposta (dá pra editar). Nada muda até você tocar em <b>Aprovar e trocar em todas</b>.'} <br>{ONDE} vira "no vídeo do mixer" / "no carrossel da casa...", {O_LINK} vira "o link" ou "os links".</p>
+    <div class="bloco-t"><b>Resposta no comentário (sorteia uma)</b>${(mo.textos.respostas_publicas||[]).map((t,i)=>`<div class="par"><div><div class="lb">Antes</div><div class="antes">${h(((mo.textos_antes||{}).respostas_publicas||[])[i]||'')}</div></div><div><div class="lb">${ap?'Em uso':'Novo'}</div><textarea data-k="respostas_publicas.${i}" rows="2">${h(t)}</textarea></div></div>`).join('')}</div>
+    <div class="bloco-t"><b>Mensagens no direct</b>${ROT_MODELO.map(([k,l])=>`<div class="par"><div><div class="lb">${l} · antes</div><div class="antes">${h(pega(mo.textos_antes||{},k)||'')}</div></div><div><div class="lb">${ap?'Em uso':'Novo'}</div><textarea data-k="${k}">${h(pega(mo.textos,k)||'')}</textarea></div></div>`).join('')}</div>
+    <div class="linha" style="justify-content:flex-end"><button class="btn ghost" data-msalvar="${mo.marca}">Salvar ajustes</button><button class="btn am" data-maprovar="${mo.marca}">Aprovar e trocar em todas</button></div></details>`;
+}
+function lerModelo(mk){
+  const el=document.querySelector(`[data-modelo="${mk}"]`); const mo=A.modelos.find(m=>m.marca===mk); const t=JSON.parse(JSON.stringify(mo.textos));
+  el.querySelectorAll('textarea[data-k]').forEach(x=>{const [a,b]=x.dataset.k.split('.'); if(b!=null) t[a][+b]=x.value; else t[a]=x.value;}); return t;
+}
+function passos(a){
+  const nos=a.nos||[]; const out=[];
+  out.push({ic:'💬',t:`Alguém comenta ${h((a.gatilhos||[]).filter(g=>!g.startsWith('#')).join(' ou ')||'a palavra')}`,c:''});
+  const rp=a.respostas_publicas&&a.respostas_publicas.length?a.respostas_publicas:(a.resposta_publica?[a.resposta_publica]:[]);
+  if(rp.length) out.push({ic:'↩',t:`Resposta no comentário${rp.length>1?' (sorteia 1 de '+rp.length+')':''}`,c:rp.map(x=>`<div class="bolha">${h(x)}</div>`).join('')});
+  let i=0;
+  while(i<nos.length){const n=nos[i];
+    if(n.tipo==='randomizador'){const r=nos.filter(x=>x.ordem===nos[i+1]?.ordem&&x.tipo==='mensagem');out.push({ic:'📩',t:`Direct: abertura (sorteia 1 de ${r.length})`,c:r.map(msgHtml).join('')});i+=1+r.length;continue}
+    if(n.tipo==='mensagem') out.push({ic:'📩',t:'Direct',c:msgHtml(n)});
+    else if(n.tipo==='atraso') out.push({ic:'⏱',t:`Espera ${Math.round((n.config.segundos||0)/60)} min`,c:''});
+    else if(n.tipo==='tag'&&n.config.pular_se_tags) out.push({ic:'1×',t:'Só manda o próximo uma vez por pessoa',c:''});
+    i++;}
+  return `<div class="fluxo">${out.map(p=>`<div class="passo"><span class="ic">${p.ic}</span><div class="cx"><span class="tt2">${p.t}</span>${p.c}</div></div>`).join('')}</div>`;
+}
+function msgHtml(n){return (n.config.mensagens||[]).map(m=>`<div class="bolha">${linkify(m.texto||'')}${(m.botoes||[]).map(b=>`<div>${b.url?`<a class="botao-dm" href="${h(b.url)}" target="_blank" rel="noopener">${h(b.label)}</a>`:`<span class="botao-dm">${h(b.label)}</span>`}</div>`).join('')}</div>`).join('')}
+function cartaoAuto(a){
+  const p=a.post; const ab=abertos.has(a.id);
+  return `<article class="auto"><div class="topo">${p&&p.capa?`<img src="${h(p.capa)}" alt="" loading="lazy">`:'<div class="ph"></div>'}
+    <div style="min-width:0;display:grid;gap:3px"><span class="pal">${h((a.gatilhos||[])[0]||'')}</span><span class="small" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p?h(p.titulo||'')+' · '+dataBR(p.quando,1):h(a.nome)}</span>
+    <span class="small">${h((a.plataformas||[]).map(r=>(REDE[r]||[r,r])[1]).join(' + '))}</span></div>
+    <button class="btn s ${a.ativo?'am':'ghost'}" data-auto="${h(a.id)}" data-v="${a.ativo?0:1}" aria-label="${a.ativo?'Desligar':'Ligar'}">${a.ativo?'Ligada':'Desligada'}</button></div>
+    <div class="nums"><span>💬 ${fmt(a.comentarios)} comentários</span><span>📩 ${fmt(a.dms)} receberam</span><span>👆 ${fmt(a.cliques)} cliques</span>${a.ultimo?`<span>último ${dataBR(a.ultimo,1)}</span>`:''}</div>
+    <button class="btn ghost s" data-fluxo="${h(a.id)}">${ab?'Esconder fluxo':'Ver fluxo, respostas e links'}</button>${ab?passos(a):''}</article>`;
+}
+function vAutomacoes(){
+  if(!A){$('#app').innerHTML='<div class="load">Carregando automações…</div>';carregarAutomacoes();return}
+  const mks=marca==='todas'?['buscadorgeek','brunotropolis']:[marca];
+  $('#app').innerHTML=`<h2 class="sec">Automações</h2><p class="dica">Cada post tem uma palavra: quem comenta recebe a resposta no comentário e o direct com o link. Aqui você vê o fluxo inteiro, os textos e os links de cada uma.</p>`+
+    mks.map(mk=>{const L=A.automacoes.filter(a=>a.marca===mk);const mo=A.modelos.find(m=>m.marca===mk);
+      return `<div class="marca-bloco"><div class="mkh"><span class="dot" style="width:12px;height:12px;background:var(--${mk==='buscadorgeek'?'geek':'bruno'})"></span><b>${MARCA[mk]}</b></div>
+      ${mo?blocoModelo(mo):''}
+      ${L.length?`<div class="lista-auto">${L.map(cartaoAuto).join('')}</div>`:`<div class="empty">${mk==='brunotropolis'?'O @brunotropolis ainda não tem automação de "comenta". Quando um post dele ganhar palavra, ela aparece aqui.':'Nenhuma automação.'}</div>`}</div>`}).join('');
+}
+
+// ---------- CAIXA DE ENTRADA ----------
+let CX=null, cxTipo='todas', cxSel=null, cxMsgs=null;
+async function carregarCaixa(){try{CX=await api({acao:'inbox',marca:marca==='todas'?null:marca,tipo:cxTipo})}catch(e){if(e.message!=='auth')toast('Caixa não carregou: '+e.message,true);CX={contatos:[]}}if(vista==='caixa')vCaixa()}
+const quando=d=>{if(!d)return'';const x=new Date(d),dif=(Date.now()-x)/36e5;return dif<24?horaBR(x):x.toLocaleDateString('pt-BR',{timeZone:TZ,day:'2-digit',month:'2-digit'})};
+function vCaixa(){
+  if(!CX){$('#app').innerHTML='<div class="load">Carregando caixa de entrada…</div>';carregarCaixa();return}
+  const L=CX.contatos||[];
+  $('#app').innerHTML=`<h2 class="sec">Caixa de entrada</h2><p class="dica">Quem comentou ou falou com ${marca==='todas'?'as duas marcas':NOMEM[marca]} pelos posts e automações. Dá pra responder no direct do Instagram até 24h depois da última mensagem da pessoa (regra da Meta).</p>
+    <div class="chips">${[['todas','Todas'],['conversas','Escreveram no direct'],['comentarios','Comentários']].map(([k,l])=>`<button class="chip ${cxTipo===k?'on':''}" data-cx="${k}">${l}</button>`).join('')}</div>
+    <div class="inbox"><div class="contatos">${L.length?L.map(c=>`<button class="contato ${cxSel===c.id?'on':''}" data-ct="${c.id}"><span class="av" style="${c.foto_url?`background-image:url('${h(c.foto_url)}')`:''}">${c.foto_url?'':h((c.username||c.nome||'?')[0].toUpperCase())}</span>
+      <span style="min-width:0;display:grid;gap:2px"><span class="nm">${h(c.username?'@'+c.username:(c.nome||'Pessoa do '+(c.rede==='facebook'?'Facebook':'Instagram')))}</span><span class="pv">${c.ultima_direcao==='saida'?'Você: ':''}${h(c.ultima_texto||'')}</span></span>
+      <span class="qd"><span>${quando(c.ultimo_em)}</span><span class="mk ${c.marca}" style="font-size:9px;padding:1px 6px">${c.marca==='buscadorgeek'?'Geek':'Bruno'}</span></span></button>`).join(''):'<div class="empty">Ninguém por aqui ainda.</div>'}</div>
+    <div id="cvBox" class="${innerWidth<900?'so-cel':''}">${cxSel?'':'<div class="empty">Escolha uma conversa.</div>'}</div></div>`;
+  if(cxSel&&innerWidth>=900) mostraConversa(false);
+}
+async function abrirConversa(id){
+  cxSel=id; cxMsgs=null;
+  if(innerWidth<900){ $('#vwIn').innerHTML='<div class="load" style="color:#FBE4BE">Carregando…</div>'; abrirVw(); }
+  else vCaixa();
+  try{cxMsgs=(await api({acao:'conversa',contato_id:id})).mensagens||[]}catch(e){toast(e.message,true);cxMsgs=[]}
+  mostraConversa(innerWidth<900);
+}
+function htmlConversa(){
+  const c=(CX.contatos||[]).find(x=>x.id===cxSel)||{}; const M=cxMsgs||[];
+  const dentro=c.ultima_entrada&&(Date.now()-new Date(c.ultima_entrada))<24*36e5&&c.rede==='instagram';
+  return `<div class="conversa"><div class="cab"><span class="mk ${c.marca}">${c.marca==='buscadorgeek'?'Geek':'Bruno'}</span><b style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis">${h(c.username?'@'+c.username:(c.nome||'Pessoa'))}</b>${c.username&&c.rede==='instagram'?`<a class="small" href="https://instagram.com/${h(c.username)}" target="_blank" rel="noopener">perfil</a>`:''}</div>
+    <div class="msgs" id="msgs">${cxMsgs===null?'<div class="load">Carregando…</div>':M.map(m=>`<div class="msg ${m.direcao} ${m.canal==='comentario'||m.canal==='resposta_publica'?'com':''}">${linkify(m.texto||(m.canal==='postback'?'(tocou no botão)':''))}<span class="q">${{comentario:'comentário',resposta_publica:'resposta no comentário',fluxo:'automação',postback:'botão',dm:'direct',manual:'você',story_resposta:'resposta ao story'}[m.canal]||m.canal} · ${dataBR(m.criado_em,1)}</span></div>`).join('')}</div>
+    ${dentro?`<div class="resp"><textarea id="respTx" placeholder="Escreva sua resposta" maxlength="1000"></textarea><button class="btn am" data-responder="${c.id}" data-mk="${c.marca}">Enviar</button></div>`:`<div class="resp" style="grid-template-columns:1fr"><span class="small">${c.rede==='facebook'?'Responder no Facebook: pelo app.':'Passou de 24h da última mensagem da pessoa: a Meta não deixa responder pelo sistema. Dá pelo app do Instagram.'}</span></div>`}</div>`;
+}
+function mostraConversa(cel){
+  if(cel){ $('#vwIn').innerHTML=`<div style="grid-column:1/-1">${htmlConversa()}</div>`; }
+  else { const b=$('#cvBox'); if(b) b.innerHTML=htmlConversa(); }
+  const m=$('#msgs'); if(m) m.scrollTop=m.scrollHeight;
 }
 
 // ---------- visualizador ----------
@@ -629,8 +797,13 @@ document.addEventListener('click',async e=>{
   if(t.closest('[data-close]')) return fechar();
   if(t.closest('[data-vwx]')) return fecharVw();
   if(t.id==='vw') return fecharVw();
-  const mk=t.closest('[data-mk]'); if(mk){marca=mk.dataset.mk;ls.set('est-marca',marca);return render()}
-  const tb=t.closest('#tabs button'); if(tb){vista=tb.dataset.v;ls.set('est-vista',vista);render();window.scrollTo(0,0);return}
+  const mk=t.closest('#marcaSeg [data-mk]'); if(mk){marca=mk.dataset.mk;ls.set('est-marca',marca);CX=null;cxSel=null;return render()}
+  if(t.closest('[data-mais]')){$('#maisSheet').classList.add('on');return}
+  const iv=t.closest('[data-ir-v]'); if(iv){fechar();vista=iv.dataset.irV;ls.set('est-vista',vista);render();window.scrollTo(0,0);return}
+  const fx=t.closest('[data-fluxo]'); if(fx){abertos.has(fx.dataset.fluxo)?abertos.delete(fx.dataset.fluxo):abertos.add(fx.dataset.fluxo);return vAutomacoes()}
+  const cxb=t.closest('[data-cx]'); if(cxb){cxTipo=cxb.dataset.cx;CX=null;return vCaixa()}
+  const ct=t.closest('[data-ct]'); if(ct) return abrirConversa(ct.dataset.ct);
+  const tb=t.closest('#tabs button:not([data-mais])'); if(tb){vista=tb.dataset.v;ls.set('est-vista',vista);render();window.scrollTo(0,0);return}
   const g=t.closest('[data-geek]'); if(g) return abrirGeek(g.dataset.geek);
   const b=t.closest('[data-bruno]'); if(b) return abrirBruno(b.dataset.bruno);
   const ev=t.closest('[data-ev]'); if(ev) return abrirEvento(ev.dataset.ev);
@@ -647,14 +820,18 @@ document.addEventListener('click',async e=>{
     const mv=t.closest('[data-mv]'); if(mv){mv.disabled=true;await api({acao:'status',id:mv.dataset.mv,status:mv.dataset.to});toast('Movida');return carregar()}
     const pg=t.closest('[data-pegar]'); if(pg){pg.disabled=true;await geek('oferta_pegar',{oferta_id:pg.dataset.pegar});toast('Escolhido');return carregar()}
     const st=t.closest('[data-st]'); if(st){st.disabled=true;await geek('produto_status',{id:st.dataset.st,status:st.dataset.v});return carregar()}
-    const au=t.closest('[data-auto]'); if(au){au.disabled=true;await geek('automacao_ligar',{id:au.dataset.auto,ativo:au.dataset.v==='1'});return carregar()}
-  }catch(er){if(er.message!=='auth')toast(er.message,true)}
+    const au=t.closest('[data-auto]'); if(au){au.disabled=true;await geek('automacao_ligar',{id:au.dataset.auto,ativo:au.dataset.v==='1'});toast(au.dataset.v==='1'?'Automação ligada':'Automação desligada');await carregarAutomacoes();return carregar()}
+    const ms=t.closest('[data-msalvar]'); if(ms){ms.disabled=true;await api({acao:'modelo_salvar',marca:ms.dataset.msalvar,textos:lerModelo(ms.dataset.msalvar)});toast('Ajustes salvos (ainda não trocou no ar)');return carregarAutomacoes()}
+    const ma=t.closest('[data-maprovar]'); if(ma){if(!confirm('Trocar os textos de TODAS as automações dessa marca pelos novos? As que estão no ar passam a responder assim na hora.'))return;ma.disabled=true;
+      await api({acao:'modelo_salvar',marca:ma.dataset.maprovar,textos:lerModelo(ma.dataset.maprovar)});const r=await api({acao:'modelo_aprovar',marca:ma.dataset.maprovar});toast('Textos trocados ('+(((r.linhas||[])[0]||{}).trocas||0)+' mensagens)');return carregarAutomacoes()}
+    const rs=t.closest('[data-responder]'); if(rs){const tx=$('#respTx').value.trim();if(!tx)return;rs.disabled=true;await api({acao:'responder',contato_id:rs.dataset.responder,marca:rs.dataset.mk,texto:tx});toast('Enviado');cxMsgs=(await api({acao:'conversa',contato_id:rs.dataset.responder})).mensagens||[];return mostraConversa(innerWidth<900)}
+  }catch(er){if(er.message!=='auth')toast(er.message,true);t.closest('button')&&(t.closest('button').disabled=false)}
 });
 document.addEventListener('pointermove',e=>{const tip=$('#tip');const r=e.target.closest&&e.target.closest('[data-tip]');if(!r){tip.style.display='none';return}tip.textContent=r.dataset.tip;tip.style.display='block';tip.style.left=Math.min(innerWidth-250,e.clientX+12)+'px';tip.style.top=(e.clientY+14)+'px'});
 $('#apOk').onclick=async()=>{const v=$('#apQuando').value;if(!v){toast('Escolhe dia e hora');return}
   try{await api({acao:'aprovar',conteudo_id:aprovId,agendado_para:new Date(v).toISOString()});fechar();fecharVw();toast('Agendado');carregar()}catch(e){if(e.message!=='auth')toast('Erro: '+e.message,true)}};
 $('#novaBtn').onclick=()=>abrirPauta(null);
-$('#recarregar').onclick=carregar;
+$('#recarregar').onclick=()=>{A=null;CX=null;carregar()};
 $('#fSalvar').onclick=()=>salvar();
 $('#fDescartar').onclick=()=>{if(confirm('Descartar esta pauta?'))salvar('descartado')};
 $('#fRefAdd').onclick=addLink; $('#fRefUrl').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();addLink()}};
