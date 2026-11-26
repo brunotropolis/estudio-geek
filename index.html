@@ -246,6 +246,51 @@ textarea.in.big{min-height:160px}
 .redes{display:flex;gap:14px;flex-wrap:wrap;font-weight:900;font-size:14.5px}
 .redes label{display:flex;gap:6px;align-items:center;color:var(--tx)}
 .linha{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+/* início */
+.hero{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));margin:6px 0 14px}
+@media(max-width:480px){.hero{grid-template-columns:1fr 1fr;gap:10px}}
+.hk{background:var(--card);border:2.5px solid var(--ink);border-radius:var(--r);box-shadow:var(--sombra);padding:12px 14px;display:grid;gap:2px;min-width:0;transition:var(--tr)}
+.hk.dest{background:var(--acc-suave);border-color:var(--acc);box-shadow:0 4px 0 var(--acc)}
+.hk .l{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;opacity:.8}
+.hk .v{font:400 28px/1.1 var(--t);font-variant-numeric:tabular-nums}
+.hk .s{font-size:12.5px;font-weight:800;opacity:.85}
+.redesbar{display:flex;height:14px;border-radius:99px;overflow:hidden;border:2px solid var(--ink);margin:8px 0 6px}
+.redesbar i{display:block;height:100%}
+.leg2{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;font-weight:800;color:var(--mut)}
+.leg2 b{color:var(--tx)}
+.duas{display:grid;gap:14px}
+@media(min-width:1000px){.duas{grid-template-columns:1.4fr 1fr;align-items:start}}
+.agl{display:grid;gap:8px}
+.agl .it{display:grid;grid-template-columns:5px 48px 1fr;gap:10px;align-items:center;background:var(--card);border:2px solid var(--line2);border-radius:14px;padding:6px 10px 6px 0;overflow:hidden}
+.agl .it img,.agl .it .ph{width:48px;height:60px;object-fit:cover;border-radius:8px;background:var(--card2)}
+.agl .it .t{font-weight:800;font-size:13.5px;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* pautas: proposta nova (lista por etapa) */
+.etapas{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:4px 0 12px}
+.etapas::-webkit-scrollbar{display:none}
+.etapas button{flex:none;display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:var(--card);border:2px solid var(--line2);font-weight:900;font-size:14px;transition:var(--tr)}
+.etapas button .c{background:var(--card2);border-radius:99px;padding:0 8px;font-size:12px}
+.etapas button.on{background:var(--noite);color:var(--creme);border-color:var(--noite)}
+.etapas button.on .c{background:var(--acc);color:var(--acc-tx)}
+.pgrid{display:grid;gap:10px}
+.pc{display:grid;grid-template-columns:6px 1fr auto;gap:12px;align-items:center;background:var(--card);border:2.5px solid var(--ink);border-radius:16px;box-shadow:0 3px 0 var(--ink);padding:10px 12px 10px 0;overflow:hidden;transition:var(--tr)}
+.pc .fx{align-self:stretch;border-radius:0 6px 6px 0}
+.pc .mid{min-width:0;display:grid;gap:4px}
+.pc .tt{font-weight:900;font-size:15.5px;line-height:1.25}
+.pc .ln{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13.5px;color:var(--mut);font-weight:800}
+.pc .dir{display:grid;gap:6px;justify-items:end}
+.pc .th{width:52px;height:64px;border-radius:10px;object-fit:cover;border:2px solid var(--line2)}
+@media(min-width:900px){
+  .pboard{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:start}
+  .pboard .pcol{display:grid;gap:10px;align-content:start}
+  .pboard .pcol > h3{position:sticky;top:72px;z-index:2;margin:0;display:flex;justify-content:space-between;align-items:center;background:var(--noite);color:var(--creme);border-radius:14px;padding:9px 12px;font:400 14px/1.2 var(--t)}
+  .pboard .pcol > h3 span:last-child{background:var(--acc);color:var(--acc-tx);border-radius:99px;padding:0 8px;font:900 12px/1.6 var(--f)}
+  .pboard .pc{grid-template-columns:5px 1fr;padding:10px 10px 10px 0}
+  .pboard .pc .dir{grid-column:2;justify-items:start;grid-auto-flow:column;justify-content:start}
+  .pboard .pc .th{display:none}
+  .pboard .vz{border:2px dashed var(--line2);border-radius:14px;padding:16px;text-align:center;font-weight:800;color:var(--mut);font-size:13px;opacity:.6}
+  .etapas.so-celp{display:none}
+}
+@media(max-width:899px){.pboard .pcol{display:none}.pboard .pcol.on{display:grid;gap:10px}.pboard .pcol > h3{display:none}.pboard .vz{border:2px dashed var(--line2);border-radius:14px;padding:18px;text-align:center;font-weight:800;color:var(--mut)}}
 /* menu lateral (computador) e "Mais" (celular) */
 .so-cel{display:none!important}
 @media(max-width:899px){nav.tab .so-desk{display:none}nav.tab .so-cel{display:grid!important}}
@@ -331,10 +376,11 @@ textarea.in.big{min-height:160px}
 <main class="wrap" id="app"><div class="load">Carregando…</div></main>
 
 <nav class="tab" id="tabs">
+  <button data-v="inicio"><b>⌂</b>Início</button>
   <button data-v="aprovar"><b>✓</b>Aprovar<span class="n" id="nAprov" hidden></span></button>
   <button data-v="agenda"><b>▦</b>Agenda</button>
   <button data-v="caixa"><b>✉</b>Caixa</button>
-  <button data-v="automacoes"><b>⚡</b>Automações</button>
+  <button data-v="automacoes" class="so-desk"><b>⚡</b>Automações</button>
   <button data-v="pautas" class="so-desk"><b>✎</b>Pautas</button>
   <button data-v="crescimento" class="so-desk"><b>↗</b>Crescimento</button>
   <button data-v="geek" class="so-desk"><b>⌕</b>Produtos</button>
@@ -377,6 +423,7 @@ textarea.in.big{min-height:160px}
 <div class="sheet" id="maisSheet">
   <div class="bk" data-close></div>
   <div class="pn"><h2>MAIS</h2><div class="mais">
+    <button data-ir-v="automacoes"><b>⚡</b>Automações</button>
     <button data-ir-v="pautas"><b>✎</b>Pautas</button>
     <button data-ir-v="crescimento"><b>↗</b>Crescimento</button>
     <button data-ir-v="geek"><b>⌕</b>Produtos do Buscador Geek</button>
@@ -415,7 +462,7 @@ const EL=Object.fromEntries([...ETAPAS,['descartado','Descartado']]);
 const FORMATOS=[['carrossel','Carrossel'],['reels','Reels'],['estatico','Estático'],['conceitual','Conceitual (IA)']], FL=Object.fromEntries(FORMATOS);
 const REDES_P=[['instagram','Instagram'],['facebook','Facebook'],['tiktok','TikTok'],['youtube','YouTube']];
 const ls={get:(k,d)=>{try{return localStorage.getItem(k)||d}catch(e){return d}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
-let marca=ls.get('est-marca','todas'), vista=ls.get('est-vista','aprovar'), periodo=ls.get('est-periodo','dia');
+let marca=ls.get('est-marca','todas'), vista=ls.get('est-vista','inicio'), periodo=ls.get('est-periodo','dia');
 let E={pautas:[],posts:[],agenda:[],crescimento:[],melhores:[]}, G={produtos:[],ofertas:[],carrosseis:[],agenda:[],automacoes:[]};
 let mesRef=new Date(), geekAba='produtos', filtroLoja='todas', busca='', edit=null, refs=[], aprovId=null;
 const mkOk=m=>marca==='todas'||m===marca;
@@ -438,10 +485,10 @@ async function carregar(){
 }
 function render(){
   document.documentElement.dataset.marca=marca; document.querySelectorAll('#marcaSeg button').forEach(b=>b.classList.toggle('on',b.dataset.mk===marca));
-  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.v===vista||(b.dataset.v==='mais'&&['pautas','crescimento','geek'].includes(vista))));
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.v===vista||(b.dataset.v==='mais'&&['pautas','crescimento','geek','automacoes'].includes(vista))));
   const n=pendentes().length; const nb=$('#nAprov'); nb.hidden=!n; nb.textContent=n;
   if(!E.ok&&!G.ok){$('#app').innerHTML='<div class="load">Carregando…</div>';return}
-  ({aprovar:vAprovar,agenda:vAgenda,pautas:vPautas,crescimento:vCrescimento,geek:vGeek,automacoes:vAutomacoes,caixa:vCaixa}[vista]||vAprovar)();
+  ({inicio:vInicio,aprovar:vAprovar,agenda:vAgenda,pautas:(ls.get('est-pautas-nova','')==='1'?vPautas2:vPautas),crescimento:vCrescimento,geek:vGeek,automacoes:vAutomacoes,caixa:vCaixa}[vista]||vAprovar)();
 }
 
 // ---------- APROVAR ----------
@@ -626,6 +673,85 @@ function vGeek(){
 }
 
 
+
+// ---------- INÍCIO ----------
+let iniJan=+ls.get('est-ini-jan','30');
+const COR={instagram:'var(--ig)',facebook:'var(--fb)',tiktok:'var(--tt)',youtube:'var(--yt)'};
+function vInicio(){
+  const mks=marca==='todas'?['brunotropolis','buscadorgeek']:[marca];
+  const C=E.crescimento.filter(r=>mks.includes(r.marca));
+  const hoje=diaBR(new Date()), ini=diaBR(Date.now()-iniJan*864e5), ini30=diaBR(Date.now()-30*864e5);
+  const series={}; for(const r of C) (series[r.marca+'/'+r.rede]=series[r.marca+'/'+r.rede]||[]).push(r);
+  // seguidores agora (último número de cada conta) e ganho no período (só conta com número no começo e no fim)
+  let total=0, ganho=null, porRede={}, semHist=0;
+  for(const [k,s] of Object.entries(series)){const v=s.filter(r=>r.seguidores!=null); if(!v.length) continue; const u=v[v.length-1]; total+=u.seguidores; const rd=k.split('/')[1]; porRede[rd]=(porRede[rd]||0)+u.seguidores;
+    const b=v.find(r=>r.data>=ini); if(b&&b!==u){ganho=(ganho||0)+(u.seguidores-b.seguidores)} else semHist++; }
+  const s30=k=>{const v=C.filter(r=>r.data>=ini30&&r[k]!=null);return v.length?v.reduce((a,r)=>a+Number(r[k]),0):null};
+  const alc=s30('alcance'), cur=s30('curtidas'), com=s30('comentarios'), vis=s30('visualizacoes');
+  const engaj=alc&&cur!=null?((cur+(com||0))/alc*100):null;
+  const pub30=E.agenda.filter(p=>mks.includes(p.marca)&&['publicado','parcial'].includes(p.status)&&diaBR(p.quando)>=ini30).length;
+  const prox=E.agenda.filter(p=>mks.includes(p.marca)&&p.status==='agendado'&&new Date(p.quando)>Date.now()&&new Date(p.quando)<Date.now()+7*864e5).sort((a,b)=>String(a.quando).localeCompare(String(b.quando)));
+  // mapa de crescimento: ganho acumulado por rede no período (começa em 0 no 1º dia com número de cada conta)
+  const dias=[]; for(let d=new Date(ini+'T12:00:00Z');diaBR(d)<hoje;d=new Date(+d+864e5)) dias.push(d.toISOString().slice(0,10));
+  const lin={}; for(const [k,s] of Object.entries(series)){const rd=k.split('/')[1]; const v=s.filter(r=>r.seguidores!=null&&r.data>=ini); if(v.length<2) continue; const base=v[0].seguidores; const m=Object.fromEntries(v.map(r=>[r.data,r.seguidores-base]));
+    lin[rd]=lin[rd]||{}; let ult=null; for(const d of dias){ if(m[d]!=null) ult=m[d]; if(ult!=null) lin[rd][d]=(lin[rd][d]||0)+ult; } }
+  const redesLin=Object.keys(lin);
+  let graf='<div class="small" style="padding:26px 0;text-align:center">Ainda sem histórico suficiente. O robô grava todo dia às 8h20 e a curva vai se formando.</div>';
+  if(redesLin.length){
+    const tot={}; for(const d of dias){let t=null; for(const rd of redesLin){ if(lin[rd][d]!=null) t=(t||0)+lin[rd][d]; } if(t!=null) tot[d]=t;}
+    const vals=[...Object.values(tot),...redesLin.flatMap(rd=>Object.values(lin[rd])),0];
+    const mx=Math.max(1,...vals), mn=Math.min(0,...vals), W=innerWidth<600?380:720,H=innerWidth<600?240:230,PL=40,PB=24,PT=12, sx=i=>PL+i*(W-PL-8)/Math.max(1,dias.length-1), sy=v=>PT+(mx-v)/(mx-mn)*(H-PT-PB);
+    const path=m=>{let d='',on=false;dias.forEach((x,i)=>{if(m[x]==null){on=false;return}d+=(on?'L':'M')+sx(i).toFixed(1)+' '+sy(m[x]).toFixed(1);on=true});return d};
+    const area='M'+sx(dias.findIndex(x=>tot[x]!=null)).toFixed(1)+' '+sy(0)+' '+path(tot).replace(/^M/,'L')+' L'+sx(dias.length-1-[...dias].reverse().findIndex(x=>tot[x]!=null)).toFixed(1)+' '+sy(0)+' Z';
+    const marcas=dias.map((x,i)=>i%Math.ceil(dias.length/8)===0?`<text x="${sx(i).toFixed(1)}" y="${H-6}" fill="var(--mut)" font-size="11" text-anchor="middle">${x.slice(8,10)}/${x.slice(5,7)}</text>`:'').join('');
+    const alvos=dias.map((x,i)=>`<rect x="${(sx(i)-(W-PL)/dias.length/2).toFixed(1)}" y="${PT}" width="${((W-PL)/dias.length).toFixed(1)}" height="${H-PT-PB}" fill="transparent" data-tip="${h(x.slice(8,10)+'/'+x.slice(5,7)+': '+(tot[x]==null?'sem dado':(tot[x]>=0?'+':'')+fmt(tot[x])+' no período · '+redesLin.map(rd=>REDE[rd][0]+' '+(lin[rd][x]==null?'sem dado':(lin[rd][x]>=0?'+':'')+fmt(lin[rd][x]))).join(' · ')))}"/>`).join('');
+    graf=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Seguidores ganhos acumulados no período"><line x1="${PL}" x2="${W}" y1="${sy(0)}" y2="${sy(0)}" stroke="var(--line2)"/>
+      <text x="${PL-6}" y="${sy(mx)+4}" fill="var(--mut)" font-size="11" text-anchor="end">+${fmt(mx)}</text><text x="${PL-6}" y="${sy(0)+4}" fill="var(--mut)" font-size="11" text-anchor="end">0</text>
+      <path d="${area}" fill="var(--acc)" opacity=".16"/><path d="${path(tot)}" fill="none" stroke="var(--acc)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+      ${redesLin.length>1?redesLin.map(rd=>`<path d="${path(lin[rd])}" fill="none" stroke="${COR[rd]}" stroke-width="2" stroke-dasharray="5 4"/>`).join(''):''}${marcas}${alvos}</svg>`;
+  }
+  const mel=E.melhores.filter(m=>mks.includes(m.marca)).flatMap(m=>(m.melhores||[]).map(x=>({...x,rede:m.rede,marca:m.marca}))).filter(x=>!x.data||diaBR(x.data)>=ini30)
+    .sort((a,b)=>((b.curtidas||0)+2*(b.comentarios||0))-((a.curtidas||0)+2*(a.comentarios||0))).slice(0,6);
+  const totRede=Object.values(porRede).reduce((a,b)=>a+b,0)||1;
+  const nome=marca==='todas'?'Brunotropolis + Buscador Geek':MARCA[marca];
+  $('#app').innerHTML=`<h2 class="sec">Início</h2><p class="dica" style="margin-bottom:6px">${nome}: como as redes estão crescendo, o que mais engajou e o que vem por aí. Números do robô diário (8h20); "sem dado" é quando a rede não informa.</p>
+    <div class="hero">
+      <div class="hk dest"><span class="l">Seguidores</span><span class="v">${fmt(total)}</span><span class="s">${ganho==null?'ganho: ainda sem histórico':(ganho>=0?'+':'')+fmt(ganho)+' em '+iniJan+' dias'+(semHist?' · '+semHist+(semHist>1?' contas começaram':' conta começou')+' agora':'')}</span></div>
+      <div class="hk"><span class="l">Alcance 30 dias</span><span class="v">${alc==null?'sem dado':fmt(alc)}</span><span class="s">soma dos dias, Instagram</span></div>
+      <div class="hk"><span class="l">Curtidas 30 dias</span><span class="v">${cur==null?'sem dado':fmt(cur)}</span><span class="s">${com==null?'':fmt(com)+' comentários'}</span></div>
+      <div class="hk"><span class="l">Engajamento</span><span class="v">${engaj==null?'sem dado':engaj.toLocaleString('pt-BR',{maximumFractionDigits:1})+'%'}</span><span class="s">curtidas + comentários ÷ alcance</span></div>
+      <div class="hk"><span class="l">Posts 30 dias</span><span class="v">${fmt(pub30)}</span><span class="s">${prox.length} agendados pros próximos 7 dias</span></div>
+      ${vis!=null?`<div class="hk"><span class="l">Views 30 dias</span><span class="v">${fmt(vis)}</span><span class="s">Instagram, Facebook e YouTube</span></div>`:''}
+    </div>
+    <div class="grafico"><div class="linha" style="justify-content:space-between"><h3>Mapa de crescimento</h3><div class="chips" style="padding:0">${[[30,'30 dias'],[90,'90 dias'],[365,'12 meses']].map(([k,l])=>`<button class="chip ${iniJan===k?'on':''}" data-ijan="${k}">${l}</button>`).join('')}</div></div>
+      <div class="small" style="margin:2px 0 8px">Seguidores ganhos somados no período (linha cheia). ${redesLin.length>1?'Pontilhado: cada rede.':''} Conta que ainda não tem histórico entra a partir do dia em que o robô começou a ler.</div>
+      <div style="overflow-x:auto">${graf}</div>
+      <div class="redesbar">${['instagram','facebook','tiktok','youtube'].filter(rd=>porRede[rd]).map(rd=>`<i style="width:${(porRede[rd]/totRede*100).toFixed(2)}%;background:${COR[rd]}" title="${REDE[rd][1]}"></i>`).join('')}</div>
+      <div class="leg2">${['instagram','facebook','tiktok','youtube'].map(rd=>`<span><span class="dot" style="background:${COR[rd]}"></span> ${REDE[rd][1]} <b>${porRede[rd]!=null?fmt(porRede[rd]):'sem dado'}</b></span>`).join('')}</div></div>
+    <div class="duas"><div><h3 style="margin:8px 0 10px;font:400 19px/1.2 var(--t)">Principais posts (30 dias)</h3>
+      ${mel.length?`<div class="top3">${mel.map(x=>`<a class="mp" href="${h(x.link||'#')}" target="_blank" rel="noopener"><img src="${h(x.thumb||'')}" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div style="min-width:0"><div class="small"><span class="rd ${x.rede}">${REDE[x.rede][0][0]}</span> ${marca==='todas'?`<span class="mk ${x.marca}" style="font-size:9px;padding:0 6px">${x.marca==='buscadorgeek'?'Geek':'Bruno'}</span> `:''}${x.data?dataBR(x.data):''}</div><div class="t">${h(x.titulo||'post')}</div><div class="small">${fmt(x.curtidas||0)} curtidas · ${fmt(x.comentarios||0)} coment.${x.visualizacoes!=null?' · '+fmt(x.visualizacoes)+' views':''}</div></div></a>`).join('')}</div>`:'<div class="empty">Sem posts com número nos últimos 30 dias.</div>'}</div>
+      <div><h3 style="margin:8px 0 10px;font:400 19px/1.2 var(--t)">Próximos 7 dias</h3>
+      ${prox.length?`<div class="agl">${prox.slice(0,10).map(p=>`<button class="it" data-ev="${h(p.id)}" style="text-align:left;width:100%"><span style="align-self:stretch;background:var(--${p.marca==='buscadorgeek'?'geek':'bruno'})"></span>${p.capa?`<img src="${h(p.capa)}" alt="" loading="lazy">`:'<span class="ph"></span>'}<span style="min-width:0;display:grid;gap:2px"><span class="small" style="font-weight:900">${dataBR(p.quando,1)} ${(p.plataformas||[]).map(r=>`<span class="rd ${r}">${(REDE[r]||[r])[0][0]}</span>`).join('')}</span><span class="t">${h(p.titulo||p.tipo)}</span>${p.palavra?`<span class="small"><span class="dot ${p.automacao_ativa?'on':'off'}"></span> comenta ${h(p.palavra)}</span>`:''}</span></button>`).join('')}${prox.length>10?`<div class="small">e mais ${prox.length-10} na Agenda</div>`:''}</div>`:'<div class="empty">Nada agendado pros próximos 7 dias.</div>'}</div></div>`;
+}
+
+// ---------- PAUTAS (proposta nova: colunas alinhadas no computador, uma etapa por vez no celular) ----------
+let etapaSel=ls.get('est-etapa','ideia');
+function pcard(p){
+  const po=p.post; const i=ETAPAS.findIndex(e=>e[0]===p.status);
+  return `<div class="pc" data-ed="${p.id}" role="button" tabindex="0" style="cursor:pointer"><span class="fx" style="background:var(--${p.marca==='buscadorgeek'?'geek':'bruno'})"></span>
+    <div class="mid"><span class="tt">${h(p.titulo||'(sem título)')}</span>
+      <span class="ln"><span class="mk ${p.marca}" style="font-size:9.5px;padding:1px 7px">${p.marca==='buscadorgeek'?'Geek':'Bruno'}</span><span>${FL[p.formato]||p.formato}</span>${p.data_desejada?`<span>· ${dataBR(p.data_desejada)}</span>`:''}${p.prioridade==1?'<span style="color:var(--bad)">· alta</span>':''}</span>
+      ${p.dono?`<span class="ln">👤 ${h(p.dono)}</span>`:''}</div>
+    <div class="dir">${po&&po.capa?`<img class="th" src="${h(po.capa)}" alt="" loading="lazy">`:''}<span style="display:flex;gap:6px">${i>=0&&i<2?`<button class="btn s am" data-mv="${p.id}" data-to="${ETAPAS[i+1][0]}" aria-label="Avançar etapa">›</button>`:''}</span></div></div>`;
+}
+function vPautas2(){
+  const P=E.pautas.filter(p=>mkOk(p.marca));
+  $('#app').innerHTML=`<h2 class="sec">Pautas</h2><p class="dica">Você joga a ideia, as sessões de produção pegam, avançam a etapa e sobem a peça pra aprovar.</p>
+    <div class="etapas so-celp">${ETAPAS.map(([k,l])=>`<button class="${etapaSel===k?'on':''}" data-etapa="${k}">${l}<span class="c">${P.filter(p=>p.status===k).length}</span></button>`).join('')}</div>
+    <div class="pboard">${ETAPAS.map(([k,l])=>{const L=P.filter(p=>p.status===k);return `<div class="pcol ${etapaSel===k?'on':''}"><h3><span>${l}</span><span>${L.length}</span></h3>${L.length?L.map(pcard).join(''):'<div class="vz">Nada aqui</div>'}</div>`}).join('')}</div>`;
+  const on=document.querySelector('.etapas .on'); if(on) on.scrollIntoView({inline:'center',block:'nearest'});
+}
+
 // ---------- AUTOMAÇÕES ----------
 let A=null, abertos=new Set();
 const NOMEM={brunotropolis:'@brunotropolis',buscadorgeek:'Buscador Geek'};
@@ -800,6 +926,8 @@ document.addEventListener('click',async e=>{
   const mk=t.closest('#marcaSeg [data-mk]'); if(mk){marca=mk.dataset.mk;ls.set('est-marca',marca);CX=null;cxSel=null;return render()}
   if(t.closest('[data-mais]')){$('#maisSheet').classList.add('on');return}
   const iv=t.closest('[data-ir-v]'); if(iv){fechar();vista=iv.dataset.irV;ls.set('est-vista',vista);render();window.scrollTo(0,0);return}
+  const ij=t.closest('[data-ijan]'); if(ij){iniJan=+ij.dataset.ijan;ls.set('est-ini-jan',String(iniJan));return vInicio()}
+  const et=t.closest('[data-etapa]'); if(et){etapaSel=et.dataset.etapa;ls.set('est-etapa',etapaSel);return vPautas2()}
   const fx=t.closest('[data-fluxo]'); if(fx){abertos.has(fx.dataset.fluxo)?abertos.delete(fx.dataset.fluxo):abertos.add(fx.dataset.fluxo);return vAutomacoes()}
   const cxb=t.closest('[data-cx]'); if(cxb){cxTipo=cxb.dataset.cx;CX=null;return vCaixa()}
   const ct=t.closest('[data-ct]'); if(ct) return abrirConversa(ct.dataset.ct);
@@ -812,7 +940,7 @@ document.addEventListener('click',async e=>{
   const pe=t.closest('[data-per]'); if(pe){periodo=pe.dataset.per;ls.set('est-periodo',periodo);return vCrescimento()}
   const ga=t.closest('[data-ga]'); if(ga){geekAba=ga.dataset.ga;return vGeek()}
   const lj=t.closest('[data-loja]'); if(lj){filtroLoja=lj.dataset.loja;return vGeek()}
-  const ed=t.closest('[data-ed]'); if(ed) return abrirPauta(E.pautas.find(p=>p.id===ed.dataset.ed));
+  const ed=!t.closest('[data-mv]')&&t.closest('[data-ed]'); if(ed) return abrirPauta(E.pautas.find(p=>p.id===ed.dataset.ed));
   const rx=t.closest('[data-rx]'); if(rx){refs.splice(+rx.dataset.rx,1);renderRefs();return}
   const ap=t.closest('[data-ap]'); if(ap){aprovId=ap.dataset.ap;const p=E.posts.find(x=>x.id===aprovId)||{};$('#apTxt').textContent=(p.titulo||'Post')+' vai pro '+((p.plataformas||[]).map(r=>(REDE[r]||[r,r])[1]).join(', ')||'Instagram')+' do @brunotropolis no horário escolhido.';
     const d=p.agendado_para?new Date(p.agendado_para):new Date(Date.now()+864e5);d.setMinutes(d.getMinutes()-d.getTimezoneOffset());$('#apQuando').value=d.toISOString().slice(0,16);$('#aprov').classList.add('on');return}
