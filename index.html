@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#011E3B">
 <link rel="icon" href="https://bio.buscadorgeek.com.br/assets/logo.jpg">
 <meta name="robots" content="noindex,nofollow">
-<title>Estúdio</title>
+<title>Tropolis Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -361,7 +361,7 @@ textarea.in.big{min-height:160px}
 <body data-marca="todas">
 <header>
   <div class="wrap top">
-    <div class="logo"><img src="https://bio.buscadorgeek.com.br/assets/logo.jpg" alt="" width="40" height="40">Estúdio<span>.</span></div>
+    <div class="logo"><img src="https://bio.buscadorgeek.com.br/assets/logo.jpg" alt="" width="40" height="40">Tropolis Lab<span>.</span></div>
     <div class="seg" id="marcaSeg" role="tablist" aria-label="Marca">
       <button data-mk="todas">Todos</button>
       <button data-mk="brunotropolis"><i style="background:var(--bruno)"></i>Brunotropolis</button>
@@ -479,7 +479,7 @@ const geek=(acao,d)=>chamar('/api/geek',{acao,...(d||{})});
 async function carregar(){
   $('#app').style.opacity=.6;
   const [a,b]=await Promise.allSettled([api({acao:'geral'}),geek('painel')]);
-  if(a.status==='fulfilled') E=Object.assign(E,a.value); else if(a.reason.message!=='auth') toast('Estúdio não carregou: '+a.reason.message,true);
+  if(a.status==='fulfilled') E=Object.assign(E,a.value); else if(a.reason.message!=='auth') toast('Tropolis Lab não carregou: '+a.reason.message,true);
   if(b.status==='fulfilled') G=Object.assign(G,b.value); else if(b.reason.message!=='auth') toast('Buscador Geek não carregou: '+b.reason.message,true);
   $('#app').style.opacity=1; render();
 }
