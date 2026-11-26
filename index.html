@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#011E3B">
-<link rel="icon" href="https://bio.buscadorgeek.com.br/assets/logo.jpg">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="robots" content="noindex,nofollow">
 <title>Tropolis Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +53,7 @@ header{position:sticky;top:0;z-index:5;background:var(--noite);color:var(--creme
 .top{display:flex;align-items:center;gap:10px 12px;min-height:64px;flex-wrap:wrap;padding:10px 16px}
 .logo{display:flex;align-items:center;gap:10px;font:400 22px/1 var(--t);letter-spacing:.01em}
 .logo img{width:40px;height:40px;border-radius:50%;border:3px solid var(--acc);background:var(--laranja);object-fit:cover;transition:var(--tr)}
-.logo span{color:var(--acc);transition:var(--tr)}
+.logo span{color:var(--acc);transition:var(--tr);margin-left:-10px}
 .sp{flex:1}
 .seg{display:flex;background:#ffffff14;border:2px solid #ffffff2b;border-radius:999px;padding:3px;gap:2px;order:3;width:100%}
 @media(min-width:760px){.seg{order:0;width:auto}}
@@ -293,6 +294,7 @@ textarea.in.big{min-height:160px}
 @media(max-width:899px){.pboard .pcol{display:none}.pboard .pcol.on{display:grid;gap:10px}.pboard .pcol > h3{display:none}.pboard .vz{border:2px dashed var(--line2);border-radius:14px;padding:18px;text-align:center;font-weight:800;color:var(--mut)}}
 /* menu lateral (computador) e "Mais" (celular) */
 .so-cel{display:none!important}
+.navlogo{display:none}
 @media(max-width:899px){nav.tab .so-desk{display:none}nav.tab .so-cel{display:grid!important}}
 @media(min-width:900px){
   body{padding:0 0 24px 212px}
@@ -303,6 +305,9 @@ textarea.in.big{min-height:160px}
   nav.tab .n{position:static;justify-self:end;grid-column:3}
   nav.tab button{grid-template-columns:30px 1fr auto}
   .toast{bottom:24px}
+  nav.tab{padding-top:14px}
+  .navlogo{display:block;width:150px;height:150px;margin:0 auto 14px;filter:drop-shadow(0 3px 0 var(--ink))}
+  header .logo{display:none}
 }
 .mais{display:grid;gap:10px}
 .mais button{display:flex;align-items:center;gap:12px;padding:14px;border-radius:16px;background:var(--card);border:2.5px solid var(--ink);box-shadow:0 3px 0 var(--ink);font-weight:900;font-size:16px;text-align:left}
@@ -361,7 +366,7 @@ textarea.in.big{min-height:160px}
 <body data-marca="todas">
 <header>
   <div class="wrap top">
-    <div class="logo"><img src="https://bio.buscadorgeek.com.br/assets/logo.jpg" alt="" width="40" height="40">Tropolis Lab<span>.</span></div>
+    <div class="logo"><img src="assets/mascote.png" alt="" width="40" height="40">Tropolis Lab<span>.</span></div>
     <div class="seg" id="marcaSeg" role="tablist" aria-label="Marca">
       <button data-mk="todas">Todos</button>
       <button data-mk="brunotropolis"><i style="background:var(--bruno)"></i>Brunotropolis</button>
@@ -376,6 +381,7 @@ textarea.in.big{min-height:160px}
 <main class="wrap" id="app"><div class="load">Carregando…</div></main>
 
 <nav class="tab" id="tabs">
+  <img class="navlogo" src="assets/tropolis-lab-logo.png" alt="Tropolis Lab" width="160" height="160">
   <button data-v="inicio"><b>⌂</b>Início</button>
   <button data-v="aprovar"><b>✓</b>Aprovar<span class="n" id="nAprov" hidden></span></button>
   <button data-v="agenda"><b>▦</b>Agenda</button>
